@@ -4,12 +4,12 @@ import { Link,useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 
 const Header = ()=>{
-    const {isLoggedIn,setisLogggedIn} = useContext(AuthContext)
+    const {isLoggedIn,setIsLoggedIn} = useContext(AuthContext)
     const navigate = useNavigate()
     const handleLogout = ()=>{
-        localStorage.removeItem("accessToken")
+        localStorage.removeItem("acessToken")
         localStorage.removeItem("refreshToken")
-        setisLogggedIn(false)
+        setIsLoggedIn(false)
         console.log("logout")
         navigate('/login')
     }
@@ -19,11 +19,14 @@ const Header = ()=>{
             <Link className="navbar-brand text-light" to="/">Stock Prediction Portal</Link>
             <div>
                 {isLoggedIn ? (
+                    <>
+                    <Button text="Dashboard" class="btn-info" url="/dashboard"/>
                     <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+                    </>
                 ) : (
                     <>
                     <Button text="Login" class="btn-outline-info" url="/login"/>
-                    &nbsp;
+                    &nbsp;&nbsp;
                     <Button text="Register" class="btn-info" url="register"/>
                     </>
                 )}
